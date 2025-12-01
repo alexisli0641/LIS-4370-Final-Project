@@ -1,0 +1,76 @@
+---
+title: "mytheme_markdown"
+output: html_document
+date: "2025-12-01"
+---
+
+The "mythemes" package creates a filter that helps create a more distinct
+and publication ready type of visualizations. It transforms regular plots into a more crisp, and high contrast plot. It prioritizes readability by decluttering the chart area removing axis ticks and minor grids while strictly enforcing a clear typographic hierarchy with bolded titles, optimized spacing, and bottom-aligned legends. Designed for flexibility, the package allows users to easily adjust the base font family and size to maintain visual consistency across reports and presentations. 
+
+```{r setup,}
+
+#' Custom Theme: Alex Theme
+#'
+#' A custom ggplot2 theme 
+#'
+#'
+#' @param base_family Character string. The font family to use (default: "Inter Tight").
+#' @param base_size Numeric. Base font size (default: 14).
+#'
+#' @return A ggplot2 theme object.
+#' @import ggplot2
+#' @export
+alex_theme <- function(base_family = "Inter Tight", base_size = 14) {
+
+  ggplot2::theme_minimal(
+    base_size = base_size,
+    base_family = base_family
+  ) +
+    ggplot2::theme(
+      # --- Grid Lines ---
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.major = ggplot2::element_line(
+        color = "navyblue",
+        linewidth = 0.5,
+        linetype = "dashed"
+      ),
+
+      # --- Axes ---
+      axis.ticks = ggplot2::element_blank(),
+      axis.text = ggplot2::element_text(
+        color = "brown",
+        size = ggplot2::rel(0.8)
+      ),
+      axis.title = ggplot2::element_text(
+        face = "bold",
+        margin = ggplot2::margin(t = 10, r = 10, b = 10, l = 10)
+      ),
+
+      # --- Plot Text ---
+      plot.title = ggplot2::element_text(
+        face = "bold",
+        size = ggplot2::rel(1.2),
+        margin = ggplot2::margin(b = 10),
+        hjust = 0
+      ),
+      plot.subtitle = ggplot2::element_text(
+        size = ggplot2::rel(0.9),
+        margin = ggplot2::margin(b = 15),
+        hjust = 0
+      ),
+      plot.caption = ggplot2::element_text(
+        color = "azure4",
+        size = ggplot2::rel(0.7),
+        margin = ggplot2::margin(t = 15),
+        hjust = 1
+      ),
+
+      # --- Legend ---
+      legend.position = "bottom",
+      legend.title = ggplot2::element_text(face = "bold"),
+      legend.text = ggplot2::element_text(size = ggplot2::rel(0.8))
+    )
+}
+
+```
+
